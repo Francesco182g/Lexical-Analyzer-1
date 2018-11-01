@@ -62,6 +62,7 @@ public class LexicalAnalyzer {
 			}
 		}
 		tokens.add(token);
+		token = "";
 		}
 		return tokens;
 	}
@@ -110,7 +111,6 @@ public class LexicalAnalyzer {
 					token = token + c;
 					log.info("Case 1: isLetter OR isDigit");
 				} else {
-					stato = 2;
 					i--;
 				}
 				//Controllo lunghezza testo
@@ -124,6 +124,15 @@ public class LexicalAnalyzer {
 
 			case 2: 
 				c = testo.charAt(i);
+				if(Character.isDigit(c)) {
+					token = token + c;
+					log.info("Case 2: isDigit");
+				}else {
+					
+					
+				}
+				
+				
 				/*
 				 * Default: Not WORK
 				 */
