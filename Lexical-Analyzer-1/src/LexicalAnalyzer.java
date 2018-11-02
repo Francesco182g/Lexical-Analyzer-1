@@ -68,42 +68,70 @@ public class LexicalAnalyzer {
 			 */
 			case 0:
 				c = testo.charAt(i);
+
+				//CASE 1 isLetter
 				if(Character.isLetter(c)) {
 					token = token + c;
 					log.info("Case 0: isLetter");
 					stato = 1;
+					//Cotrollo Lunghezza testo
 					if(i < lTesto) {
 						i++;
 						System.out.println("i++");
-						//CASE 4
-					} else if(Character.isDigit(c)) {
-						token = token + c;
-						log.info("Case 0: isDigit");
-						stato = 4;
-						if(i < lTesto) {
-							i++;
-							System.out.println("i++");
 
-						} else {
-							active = false;
-							System.out.println("case 0 fine lunghezza");
-						}
 					} else {
-						System.out.println("Case 0 not recognized");
 						active = false;
-						if(i <lTesto) {
-							i++;
-							System.out.println("i++");
-						}
-						break;
-
+						System.out.println("case 0 fine lunghezza");
 					}
-					//Controllo lunghezza testo
+					//Fine controllo lunghezza testo
+
+					//CASE 2 isDigit
+				} else if(Character.isDigit(c)) {
+					token = token + c;
+					log.info("Case 0: isDigit");
+					stato = 2;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+
+					//CASE 3 isBracket
+				}else if(c == '(' | c == ')'| c == '[' | c == ']') {
+					token = token + c;
+					log.info("Case 0: isDigit");
+					stato = 3;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+
+				} else {
+					System.out.println("Case 0 not recognized");
+					active = false;
+					if(i <lTesto) {
+						i++;
+						System.out.println("i++");
+					}
 					break;
+
 				}
+				//Controllo lunghezza testo
+				break;
 
 				/*
-				 * CASE 1:
+				 * CASE 1: Riconosce isLetter | isDigit else si ferma
 				 */
 			case 1: 
 				c = testo.charAt(i);
@@ -111,11 +139,10 @@ public class LexicalAnalyzer {
 					token = token + c;
 					log.info("Case 1: isLetter OR isDigit");
 					if(i < lTesto) {
-						System.out.println(i);
 						i++;
 					} else {
 						active = false;
-						System.out.println("case 0 fine lunghezza");
+						System.out.println("case 1: fine lunghezza");
 					}
 				} else {
 					active = false;
@@ -123,18 +150,19 @@ public class LexicalAnalyzer {
 				}
 				break;
 
+				/*
+				 * CASE 2: Riconosce isDigit else si ferma
+				 */
 			case 2: 
 				c = testo.charAt(i);
 				if(Character.isDigit(c)) {
 					token = token + c;
 					log.info("Case 2: isDigit");
 					if(i < lTesto) {
-						System.out.println("pass");
-						System.out.println(i);
 						i++;
 					} else {
 						active = false;
-						System.out.println("case 0 fine lunghezza");
+						System.out.println("case 2: fine lunghezza");
 					}
 				} else {
 					active = false;
@@ -142,40 +170,19 @@ public class LexicalAnalyzer {
 				}
 				break;
 
-			case 3:
-				c = testo.charAt(i);
-				if(Character.isDigit(c)) {
-					token = token + c;
-					log.info("Case3: ");
-				} else {
-					i--;
-				}
-				//Controllo lunghezza testo
-				if(i <= lTesto) {
+				/*
+				 * CASE 3: Si ferma a prescindere dall'input
+				 */
+			case 3: 
+				active = false;
+				if(i < lTesto) {
 					i++;
 				} else {
 					active = false;
-					System.out.println("case 3 fine lunghezza");
+					System.out.println("case 2: fine lunghezza");
 				}
 				break;
 
-
-			case 4:
-				c = testo.charAt(i);
-				if(Character.isDigit(c)) {
-					token = token + c;
-					log.info("Case4: ");
-				} else {
-					i--;
-				}
-				//Controllo lunghezza testo
-				if(i <= lTesto) {
-					i++;
-				} else {
-					active = false;
-					System.out.println("case 3 fine lunghezza");
-				}
-				break;
 
 				/*
 				 * Default: Not WORK
