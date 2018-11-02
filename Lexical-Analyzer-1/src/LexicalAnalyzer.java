@@ -154,6 +154,7 @@ public class LexicalAnalyzer {
 				 * CASE 2: Riconosce isDigit else si ferma
 				 */
 			case 2: 
+				Token tok = new Token();
 				c = testo.charAt(i);
 				if(Character.isDigit(c)) {
 					token = token + c;
@@ -165,6 +166,8 @@ public class LexicalAnalyzer {
 						System.out.println("case 2: fine lunghezza");
 					}
 				} else {
+					tok.setId("N_Const");
+					tok.setAttribute(token);
 					active = false;
 					break;
 				}
@@ -175,12 +178,6 @@ public class LexicalAnalyzer {
 				 */
 			case 3: 
 				active = false;
-				if(i < lTesto) {
-					i++;
-				} else {
-					active = false;
-					System.out.println("case 2: fine lunghezza");
-				}
 				break;
 
 
@@ -193,6 +190,14 @@ public class LexicalAnalyzer {
 			}
 		}
 		return token;
+	}
+	
+	public static Token CheckIsKeywords(String token) {
+		Token to = new Token();
+		if(token.equals("if")) {
+			
+		}
+		return null;
 	}
 
 
