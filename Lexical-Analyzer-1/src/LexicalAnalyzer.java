@@ -192,6 +192,7 @@ public class LexicalAnalyzer {
 		return token;
 	}
 	
+	
 	public static Token CheckIsKeywords(String token) {
 		Token to = new Token();
 		if(token.equals("if")) {
