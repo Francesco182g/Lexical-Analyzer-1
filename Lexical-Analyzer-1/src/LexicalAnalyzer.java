@@ -31,28 +31,15 @@ public class LexicalAnalyzer {
 		while(i<lTesto) {
 			System.out.println("Chiamo token");
 			token = findToken(lessema);
-			boolean isPres = false;
-			if(token == "") {
-
-			}else {
-				Token to = new Token();
-				to.setId(""+id);
-				to.setAttribute(token);
-				tokens.add(to);
-				id++;	
-			}
 			token = "";
 		}
 
 		return tokens;
 	}
 
-	public static void addToArray() {
-
-	}
 
 	/*
-	 * Trova il lessema passatogli da readLessema
+	 * Trova il lessema passatogli da readLessema e lo aggiunge all'array
 	 */
 	public static String findToken(String testo) {
 		int stato = 0;
@@ -116,7 +103,55 @@ public class LexicalAnalyzer {
 						System.out.println("case 0 fine lunghezza");
 					}
 					//Fine controllo lunghezza testo
+					
+					//CASE 4 Relop<
+				}else if(c == '<') {
+					token = token + c;
+					log.info("Case 0: isRelop <");
+					stato = 4;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
 
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+
+					//CASE 5 Relop>
+				}else if(c == '>') {
+					token = token + c;
+					log.info("Case 0: isRelop >");
+					stato = 5;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
+					//CASE 6 Relop=
+				}else if(c == '=') {
+					token = token + c;
+					log.info("Case 0: isRelop =");
+					stato = 6;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
 				} else {
 					System.out.println("Case 0 not recognized");
 					active = false;
@@ -134,6 +169,7 @@ public class LexicalAnalyzer {
 				 * CASE 1: Riconosce isLetter | isDigit else si ferma
 				 */
 			case 1: 
+				Token to = new Token();
 				c = testo.charAt(i);
 				if((Character.isLetter(c)) | (Character.isDigit(c))) {
 					token = token + c;
@@ -145,6 +181,14 @@ public class LexicalAnalyzer {
 						System.out.println("case 1: fine lunghezza");
 					}
 				} else {
+					to = CheckIsKeywords(token);
+					System.out.println(to);
+					if(to.getId() != "null") {
+						to.setId(""+id);
+						to.setAttribute(token);
+					} else {
+						tokens.add(to);
+					}
 					active = false;
 					break;
 				}
@@ -154,7 +198,7 @@ public class LexicalAnalyzer {
 				 * CASE 2: Riconosce isDigit else si ferma
 				 */
 			case 2: 
-				Token tok = new Token();
+				Token to1 = new Token();
 				c = testo.charAt(i);
 				if(Character.isDigit(c)) {
 					token = token + c;
@@ -166,8 +210,9 @@ public class LexicalAnalyzer {
 						System.out.println("case 2: fine lunghezza");
 					}
 				} else {
-					tok.setId("N_Const");
-					tok.setAttribute(token);
+					to1.setId("N_Const");
+					to1.setAttribute(token);
+					tokens.add(to1);
 					active = false;
 					break;
 				}
@@ -176,7 +221,8 @@ public class LexicalAnalyzer {
 				/*
 				 * CASE 3: Si ferma a prescindere dall'input
 				 */
-			case 3: 
+			case 3:
+
 				active = false;
 				break;
 
@@ -191,14 +237,29 @@ public class LexicalAnalyzer {
 		}
 		return token;
 	}
-	
-	
+
+
 	public static Token CheckIsKeywords(String token) {
 		Token to = new Token();
 		if(token.equals("if")) {
-			
+			to.setId("Keywords");
+			to.setAttribute("IF");
+		} else if(token.equals("then")) {
+			to.setId("Keywords");
+			to.setAttribute("THEN");
+		} else if(token.equals("else")) {
+			to.setId("Keywords");
+			to.setAttribute("ELSE");
+		} else if(token.equals("while")) {
+			to.setId("Keywords");
+			to.setAttribute("WHILE");
+		} else if(token.equals("for")) {
+			to.setId("Keywords");
+			to.setAttribute("FOR");
+		} else {
+			log.severe("SEZIONE CheckIsKeywords: NESSUNA KEY TROVATA!");
 		}
-		return null;
+		return to;
 	}
 
 
