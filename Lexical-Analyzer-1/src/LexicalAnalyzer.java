@@ -384,8 +384,8 @@ public class LexicalAnalyzer {
 
 
 	/*
-	 * DELIMITERS AUTOMA
-	 */
+	 * DELIMITERS AUTOMA NOT USED
+
 	public static void Delimiters(char c) {
 		int stato = 0;
 		if(c == ' ') {
@@ -398,4 +398,5 @@ public class LexicalAnalyzer {
 			log.info("Delimiters - Case 0: Not recognized");
 		} 
 	}
+		 */
 }
