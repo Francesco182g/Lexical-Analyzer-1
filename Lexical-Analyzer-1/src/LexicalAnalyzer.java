@@ -190,7 +190,7 @@ public class LexicalAnalyzer {
 					if(i < lTesto) {
 						i++;
 						System.out.println("i++");
-
+ 
 					} else {
 						active = false;
 						System.out.println("case 0 fine lunghezza");
