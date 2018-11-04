@@ -22,17 +22,20 @@ For each class below, locate the tokens that will be part of language and give i
 
 - Separators (round and square brackets, comma, semicolon): 
 
+![digits img](https://github.com/Francesco182g/Lexical-Analyzer-1/blob/master/Separatori.jpg?raw=true)
 
 - Operators ("<--" To assign and only relational operators)
 
+![digits img](https://github.com/Francesco182g/Lexical-Analyzer-1/blob/master/Relop.jpg?raw=true)
 
+Automaton referred to the function FindToken(String testo).
 
-
+![digits img](https://github.com/Francesco182g/Lexical-Analyzer-1/blob/master/Lexer.jpg?raw=true)
 
 ITALIANO:
 Semplice Analizzatore Lessicale
 
-Creare un nuovo linguagio di programmazione e definirne il lessico.
+Creare un nuovo linguaggio di programmazione e definirne il lessico.
 Per ogni classe sotto riportata, individuare i token che faranno parte del linguaggio e darne una definizione regolare:
 
 - Delimitatori (spazi bianchi, tab, ritorno a capo)
@@ -41,3 +44,5 @@ Per ogni classe sotto riportata, individuare i token che faranno parte del lingu
 - Letterali (solo i numeri)
 - Separatori ( parentesi tonde e quadre, virgola, punto e virgola)
 - Operatori (“<--” per fare assegnazione e solo operatori relazionali)
+
+Per capire il programma si faccia riferimento all'ultimo automa che rappresenta la funzione findToken(String testo).
