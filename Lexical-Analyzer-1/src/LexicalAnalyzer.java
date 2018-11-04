@@ -46,6 +46,7 @@ public class LexicalAnalyzer {
 		//int backword = 0;
 		char c;
 		boolean active = true;
+		Token to = new Token();
 		while(active) {
 			switch(stato) {
 
@@ -64,8 +65,6 @@ public class LexicalAnalyzer {
 					//Cotrollo Lunghezza testo
 					if(i < lTesto) {
 						i++;
-						System.out.println("i++");
-
 					} else {
 						active = false;
 						System.out.println("case 0 fine lunghezza");
@@ -103,7 +102,7 @@ public class LexicalAnalyzer {
 						System.out.println("case 0 fine lunghezza");
 					}
 					//Fine controllo lunghezza testo
-					
+
 					//CASE 4 Relop<
 				}else if(c == '<') {
 					token = token + c;
@@ -135,7 +134,7 @@ public class LexicalAnalyzer {
 						System.out.println("case 0 fine lunghezza");
 					}
 					//Fine controllo lunghezza testo
-					
+
 					//CASE 6 Relop=
 				}else if(c == '=') {
 					token = token + c;
@@ -152,6 +151,39 @@ public class LexicalAnalyzer {
 					}
 					//Fine controllo lunghezza testo
 					
+					//CASE 3 Separat;
+				}else if(c ==';') {
+					token = token + c;
+					log.info("Case 0: isSeparat ;");
+					stato = 3;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
+					//CASE 3 Separat,
+				}else if(c ==',') {
+					token = token + c;
+					log.info("Case 0: isSeparat ,");
+					stato = 3;
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
+
 				} else {
 					System.out.println("Case 0 not recognized");
 					active = false;
@@ -162,14 +194,12 @@ public class LexicalAnalyzer {
 					break;
 
 				}
-				//Controllo lunghezza testo
 				break;
 
 				/*
 				 * CASE 1: Riconosce isLetter | isDigit else si ferma
 				 */
 			case 1: 
-				Token to = new Token();
 				c = testo.charAt(i);
 				if((Character.isLetter(c)) | (Character.isDigit(c))) {
 					token = token + c;
@@ -181,13 +211,15 @@ public class LexicalAnalyzer {
 						System.out.println("case 1: fine lunghezza");
 					}
 				} else {
-					to = CheckIsKeywords(token);
-					System.out.println(to);
-					if(to.getId() != "null") {
+					Token toKey = new Token();
+					toKey = CheckIsKeywords(token);
+					if(toKey.getId() == null) {
 						to.setId(""+id);
 						to.setAttribute(token);
-					} else {
 						tokens.add(to);
+						id++;
+					} else {
+						tokens.add(toKey);
 					}
 					active = false;
 					break;
@@ -198,21 +230,22 @@ public class LexicalAnalyzer {
 				 * CASE 2: Riconosce isDigit else si ferma
 				 */
 			case 2: 
-				Token to1 = new Token();
 				c = testo.charAt(i);
 				if(Character.isDigit(c)) {
 					token = token + c;
 					log.info("Case 2: isDigit");
+					//Cotrollo Lunghezza testo
 					if(i < lTesto) {
 						i++;
 					} else {
 						active = false;
 						System.out.println("case 2: fine lunghezza");
 					}
+					//Fine Cotrollo Lunghezza testo
 				} else {
-					to1.setId("N_Const");
-					to1.setAttribute(token);
-					tokens.add(to1);
+					to.setId("N_Const");
+					to.setAttribute(token);
+					tokens.add(to);
 					active = false;
 					break;
 				}
@@ -222,10 +255,97 @@ public class LexicalAnalyzer {
 				 * CASE 3: Si ferma a prescindere dall'input
 				 */
 			case 3:
-
+				to.setId("Separator");
+				to.setAttribute(token);
+				tokens.add(to);
 				active = false;
 				break;
 
+				/*
+				 * CASE 4: Riconosce Relop= o Relop> altrimenti si ferma
+				 */
+			case 4: 
+				c = testo.charAt(i);
+				if(c == '=') {
+					token = token + c;
+					log.info("Case 4: is Relop=");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+					} else {
+						active = false;
+						System.out.println("case 4: fine lunghezza");
+					}
+					// Fine Cotrollo Lunghezza testo
+				} else if(c == '>') {
+					token = token + c;
+					log.info("Case 4: is Relop>");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+					} else {
+						active = false;
+						System.out.println("case 4: fine lunghezza");
+					}
+					//Fine Cotrollo Lunghezza testo
+				} else {
+					to.setId("Relop");
+					to.setAttribute(token);
+					tokens.add(to);
+					active = false;
+					break;
+				}
+				break;
+				
+				/*
+				 * CASE 5: Riconosciuto Relop< o trova Relop= o si ferma
+				 */
+			case 5: 
+				c = testo.charAt(i);
+				if(c == '=') {
+					token = token + c;
+					log.info("Case 5: is Relop=");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+					} else {
+						active = false;
+						System.out.println("case 5: fine lunghezza");
+					}
+					// Fine Cotrollo Lunghezza testo
+				} else {
+					to.setId("Relop");
+					to.setAttribute(token);
+					tokens.add(to);
+					active = false;
+					break;
+				}
+				break;
+
+				/*
+				 * CASE 6: Riconosciuto Relop= o trova Relop= o  si ferma
+				 */
+			case 6: 
+				c = testo.charAt(i);
+				if(c == '=') {
+					token = token + c;
+					log.info("Case 6: is Relop=");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+					} else {
+						active = false;
+						System.out.println("case 6: fine lunghezza");
+					}
+					// Fine Cotrollo Lunghezza testo
+				} else {
+					to.setId("Relop");
+					to.setAttribute(token);
+					tokens.add(to);
+					active = false;
+					break;
+				}
+				break;
 
 				/*
 				 * Default: Not WORK
