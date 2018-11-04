@@ -183,7 +183,48 @@ public class LexicalAnalyzer {
 					}
 					//Fine controllo lunghezza testo
 					
+					//Whitespace
+				}else if(c ==' ') {
+					log.info("Case 0: Space ");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
 
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+
+					//TAB
+				}else if(c =='\t') {
+					log.info("Case 0:tab ");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
+					//New Line
+				}else if(c =='\n') {
+					log.info("Case 0: New Line ");
+					//Cotrollo Lunghezza testo
+					if(i < lTesto) {
+						i++;
+						System.out.println("i++");
+
+					} else {
+						active = false;
+						System.out.println("case 0 fine lunghezza");
+					}
+					//Fine controllo lunghezza testo
+					
 				} else {
 					System.out.println("Case 0 not recognized");
 					active = false;
@@ -361,6 +402,7 @@ public class LexicalAnalyzer {
 
 	public static Token CheckIsKeywords(String token) {
 		Token to = new Token();
+		System.out.println(token);
 		if(token.equals("if")) {
 			to.setId("Keywords");
 			to.setAttribute("IF");
@@ -381,6 +423,8 @@ public class LexicalAnalyzer {
 		}
 		return to;
 	}
+	
+	
 
 
 	/*
