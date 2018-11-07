@@ -15,10 +15,11 @@ public class Tester {
 			e.printStackTrace();
 		}
 		token = LexicalAnalyzer.getToken(lessema);
-		System.out.println("Stampo i token trovati");
+		System.out.println("Stampo i token trovati:");
 		for(int i=0; i<token.size(); i++) {
 			System.out.println(token.get(i).toString());
 		}
+		System.out.println("Tabella dei Simboli: " +LexicalAnalyzer.tabellasimboli.toString());
 	}
 	
 	public static String leggiFile() throws FileNotFoundException {

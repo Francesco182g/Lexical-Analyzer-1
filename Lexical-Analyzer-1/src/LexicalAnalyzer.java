@@ -37,7 +37,6 @@ public class LexicalAnalyzer {
 		return tokens;
 	}
 
-
 	/*
 	 * Trova il lessema passatogli da readLessema e lo aggiunge all'array
 	 */
@@ -253,12 +252,21 @@ public class LexicalAnalyzer {
 					}
 				} else {
 					Token toKey = new Token();
-					toKey = CheckIsKeywords(token);
+					toKey = CheckIsKeywords();
 					if(toKey.getId() == null) {
-						to.setId(""+id);
-						to.setAttribute(token);
-						tokens.add(to);
-						id++;
+						int ide = CheckIsPresent(token);
+						if(ide == 0) {
+							to.setId(""+id);
+							to.setAttribute(token);
+							tabellasimboli.add(to);
+							tokens.add(to);
+							id++;
+						} else {
+							to.setId(""+ide);
+							to.setAttribute(token);
+							tokens.add(to);
+						}
+						
 					} else {
 						tokens.add(toKey);
 					}
@@ -392,7 +400,7 @@ public class LexicalAnalyzer {
 				 * Default: Not WORK
 				 */
 			default:
-				System.out.println("Finish");
+				System.out.println("Default: null");
 				break;
 			}
 		}
@@ -400,9 +408,8 @@ public class LexicalAnalyzer {
 	}
 
 
-	public static Token CheckIsKeywords(String token) {
+	public static Token CheckIsKeywords() {
 		Token to = new Token();
-		System.out.println(token);
 		if(token.equals("if")) {
 			to.setId("Keywords");
 			to.setAttribute("IF");
@@ -426,10 +433,23 @@ public class LexicalAnalyzer {
 	
 	
 
-
+	public static int CheckIsPresent(String token) {
+		int ide = 0;
+		System.out.println("Stampo token: "+token);
+		for(int k=0; k<tabellasimboli.size(); k++) {
+			if(tabellasimboli.get(k).getAttribute().equals(token)){
+				ide = Integer.parseInt(tabellasimboli.get(k).getId());
+				System.out.println(ide);
+			} else {
+				log.info("CheckIsPresent: nothing");
+			}
+		}
+		return ide;
+	}
+	
 	/*
 	 * DELIMITERS AUTOMA NOT USED
-
+	 * 
 	public static void Delimiters(char c) {
 		int stato = 0;
 		if(c == ' ') {
