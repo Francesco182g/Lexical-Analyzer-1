@@ -28,7 +28,7 @@ public class Tester {
 	    Scanner in = new Scanner (file);
 	    String lessema = "";
 	    while (in.hasNextLine()) {
-	      lessema += " " + in.nextLine();
+	      lessema += "" + in.nextLine();
 	    }
 
 	    System.out.println(lessema);
