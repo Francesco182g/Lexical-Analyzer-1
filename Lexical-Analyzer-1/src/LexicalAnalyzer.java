@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
 /*
  * LexicalAnalyzer:
  * 1. Legge l'input inviatogli dal tester getToken(String lessema)
@@ -98,6 +97,7 @@ public class LexicalAnalyzer {
 
 					//CASE 4 Relop<
 				}else if(c == '<') {
+					token = token + c;
 					log.info("Case 0: isRelop <");
 					stato = 4;
 					//Cotrollo Lunghezza testo
@@ -145,7 +145,7 @@ public class LexicalAnalyzer {
 
 					//CASE 3 Separat;
 				}else if(c ==';') {
-					token = "SEMICOLON";
+					token = ";";
 					log.info("Case 0: isSeparat ;");
 					stato = 3;
 					//Cotrollo Lunghezza testo
@@ -161,7 +161,7 @@ public class LexicalAnalyzer {
 
 					//CASE 3 Separat,
 				}else if(c ==',') {
-					token = "COMMA";
+					token = ",";
 					log.info("Case 0: isSeparat ,");
 					stato = 3;
 					//Cotrollo Lunghezza testo
@@ -312,7 +312,7 @@ public class LexicalAnalyzer {
 			case 4: 
 				c = testo.charAt(i);
 				if(c == '=') {
-					token = "LE";
+					token = "<=";
 					log.info("Case 4: is Relop=");
 					//Cotrollo Lunghezza testo
 					if(i < lTesto) {
@@ -323,7 +323,7 @@ public class LexicalAnalyzer {
 					}
 					// Fine Cotrollo Lunghezza testo
 				} else if(c == '>') {
-					token = "NE";
+					token = "<>";
 					log.info("Case 4: is Relop>");
 					//Cotrollo Lunghezza testo
 					if(i < lTesto) {
@@ -333,9 +333,24 @@ public class LexicalAnalyzer {
 						System.out.println("case 4: fine lunghezza");
 					}
 					//Fine Cotrollo Lunghezza testo
+				}else if(c == '-') {
+					if(i < lTesto) {
+						if(testo.charAt(i+1) == '-') {
+							token = "<--";
+							log.info("Case 4: is Relop<-");
+							//Cotrollo Lunghezza testo
+							if(i < lTesto) {
+								i++;
+							} else {
+								active = false;
+								System.out.println("case 4: fine lunghezza");
+							}
+							//Fine Cotrollo Lunghezza testo
+						}
+					}
 				} else {
 					to.setId("Relop");
-					to.setAttribute("LT");
+					to.setAttribute(token);
 					tokens.add(to);
 					active = false;
 					break;
@@ -573,7 +588,7 @@ public class LexicalAnalyzer {
 					break;
 				}
 				break;
-				
+
 				/*
 				 * CASE 13: Riconosciuto +|-, riconosce digits
 				 */
@@ -650,21 +665,4 @@ public class LexicalAnalyzer {
 		}
 		return ide;
 	}
-
-	/*
-	 * DELIMITERS AUTOMA NOT USED
-	 * 
-	public static void Delimiters(char c) {
-		int stato = 0;
-		if(c == ' ') {
-			log.info("Delimiters - Delimiters - Case 0: Space find");
-		} else if(c == '\t') {
-			log.info("Delimiters - Case 0: Tab find");
-		} else if(c == '\n') {
-			log.info("Delimiters - Case 0: new line find");
-		} else {
-			log.info("Delimiters - Case 0: Not recognized");
-		} 
-	}
-	 */
 }
