@@ -54,7 +54,7 @@ public class LexicalAnalyzer {
 					log.info("Case 0: isLetter");
 					stato = 1;
 					active = checkLengthText(lTesto);
-					
+
 					/*
 					 * CASE 0-2: else if c is digit goto stato2
 					 */
@@ -270,8 +270,27 @@ public class LexicalAnalyzer {
 					stato = 9;
 					active = checkLengthText(lTesto);
 
+					//Cotrolla se è . e se dopo c'è digit
 				} else if(c == '.'){
-					
+					if(i+1 < lTesto & Character.isDigit(testo.charAt(i+1))) {
+						token = token + c;
+						log.info("Case 9: is . and after there is digit");
+						stato = 10;
+						active = checkLengthText(lTesto);
+					}
+
+					//Cotrolla se è E e se dopo c'è digit | + | -					
+				} else if(c == 'E'){
+					if(i+1< lTesto) {
+						char t = testo.charAt(i+1);
+						if((Character.isDigit(t)) | (t == 'E')) {
+							token = token + c;
+							log.info("Case 9: is E and after there is digit or + or -");
+							stato = 12;
+							active = checkLengthText(lTesto);
+						}
+					}
+
 
 				} else {
 					to.setId("Nconst");
@@ -289,7 +308,7 @@ public class LexicalAnalyzer {
 				if(Character.isDigit(c)) {
 					token = token + c;
 					log.info("Case 10: is digit");
-					stato = 11;
+					stato = 10;
 					active = checkLengthText(lTesto);
 
 				} else {
@@ -305,17 +324,6 @@ public class LexicalAnalyzer {
 			case 11: 
 				c = testo.charAt(i);
 				if(Character.isDigit(c)) {
-					token = token + c;
-					log.info("Case 11: is digit");
-					stato = 11;
-					active = checkLengthText(lTesto);
-
-				}else if(c == 'E') {
-					if(i+1 < lTesto & (Character.isDigit(testo.charAt(i+1)) | Character.isDigit(testo.charAt(i+1))))
-					token = token + c;
-					log.info("Case 11: is E");
-					stato = 12;
-					active = checkLengthText(lTesto);
 
 				}else{
 					to.setId("Nconst");
@@ -337,10 +345,10 @@ public class LexicalAnalyzer {
 
 				} else if((c=='+')|(c=='-')) {
 					char t = testo.charAt(i+1);
-						token = token + c;
-						log.info("Case 12: is +|-");
-						stato = 13;
-						active = checkLengthText(lTesto);
+					token = token + c;
+					log.info("Case 12: is +|-");
+					stato = 13;
+					active = checkLengthText(lTesto);
 				}else{
 					to.setId("Nconst");
 					to.setAttribute(token);
