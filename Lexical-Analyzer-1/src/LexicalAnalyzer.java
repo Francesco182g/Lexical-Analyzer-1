@@ -19,7 +19,7 @@ public class LexicalAnalyzer {
 	public static int id = 1;
 
 	public Token getToken(String lessema){
-		LogManager.getLogManager().reset();
+		//LogManager.getLogManager().reset();
 		int lTesto = lessema.length()-1;
 		System.out.println("Lunghezza Testo: " +lTesto +" Caratteri");
 		Token token = new Token();
@@ -283,15 +283,18 @@ public class LexicalAnalyzer {
 				} else if(c == 'E'){
 					if(i+1< lTesto) {
 						char t = testo.charAt(i+1);
-						if((Character.isDigit(t)) | (t == 'E')) {
+						if((Character.isDigit(t)) | (t == '+') | (t == '-')) {
 							token = token + c;
 							log.info("Case 9: is E and after there is digit or + or -");
 							stato = 12;
 							active = checkLengthText(lTesto);
 						}
+					} else {
+						to.setId("Nconst");
+						to.setAttribute(token);
+						log.info("Stato 9 ritorna digit");
+						return to;
 					}
-
-
 				} else {
 					to.setId("Nconst");
 					to.setAttribute(token);
