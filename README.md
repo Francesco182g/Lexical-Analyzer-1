@@ -30,7 +30,7 @@ For each class below, locate the tokens that will be part of language and give i
 
 Automaton referred to the function FindToken(String testo).
 
-![digits img](https://github.com/Francesco182g/Lexical-Analyzer-1/blob/master/Lexer.jpg?raw=true)
+![digits img](https://github.com/Francesco182g/Lexical-Analyzer-1/blob/master/Lexer.png?raw=true)
 
 ITALIANO:
 Semplice Analizzatore Lessicale
