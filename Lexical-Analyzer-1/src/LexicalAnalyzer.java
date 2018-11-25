@@ -2,7 +2,6 @@
 import java.util.ArrayList;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 /*
  * LexicalAnalyzer:
  * 1. Legge l'input inviatogli dal tester getToken(String lessema)
