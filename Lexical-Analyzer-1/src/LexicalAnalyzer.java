@@ -1,7 +1,7 @@
-
 import java.util.ArrayList;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
 /*
  * LexicalAnalyzer:
  * 1. Legge l'input inviatogli dal tester getToken(String lessema)
@@ -9,7 +9,6 @@ import java.util.logging.Logger;
  * 3. Riconosce il token e lo aggiunge alla tabella dei simboli e al flusso di token 
  * 4. Lo invia al Tester
  */
-
 
 public class LexicalAnalyzer {
 	public final static Logger log = Logger.getLogger(LexicalAnalyzer.class.getName());
