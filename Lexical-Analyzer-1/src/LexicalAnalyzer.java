@@ -10,6 +10,7 @@ import java.util.logging.Logger;
  * 4. Lo invia al Tester
  */
 
+
 public class LexicalAnalyzer {
 	public final static Logger log = Logger.getLogger(LexicalAnalyzer.class.getName());
 	public String ritorna;
