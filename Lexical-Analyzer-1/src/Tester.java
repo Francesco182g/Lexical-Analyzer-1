@@ -14,18 +14,12 @@ public class Tester {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 		LexicalAnalyzer lexer = new LexicalAnalyzer();
+		lexer.getNextToken(lessema);
+	}
 
-			Token token = lexer.getToken(lessema);		
-		/*
-		System.out.println("Stampo i token trovati:");
-		
-		for(int i=0; i<tokens.size(); i++) {
-			System.out.println(tokens.get(i).toString());
-		}
-		System.out.println("Tabella dei Simboli: " +LexicalAnalyzer.tabellasimboli.toString());
-		*/
+	public static void getNextToken(Token token) {
+		System.out.println(token);
 	}
 	
 	public static String leggiFile() throws FileNotFoundException {
@@ -36,8 +30,6 @@ public class Tester {
 	      lessema += "" + in.nextLine();
 	      lessema = lessema + "\n";
 	    }
-
-	    System.out.println(lessema);
 		return lessema;
 	  }
 	
