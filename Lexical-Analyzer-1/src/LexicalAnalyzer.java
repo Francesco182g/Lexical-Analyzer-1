@@ -4,10 +4,10 @@ import java.util.logging.Logger;
 
 /*
  * LexicalAnalyzer:
- * 1. Legge l'input inviatogli dal tester getToken(String lessema)
- * 2. Contiene tutti i metodi per riconoscere i lessemi
- * 3. Riconosce il token e lo aggiunge alla tabella dei simboli e al flusso di token 
- * 4. Lo invia al Tester
+* 1. Read the input sent by the Tester getNextToken(String lessema)
+  * 2. Contains all methods for recognizing lexemes
+  * 3. Recognize the token and add it to the symbol table and token flow
+  * 4. Send it to the Tester
  */
 
 public class LexicalAnalyzer {
@@ -31,8 +31,8 @@ public class LexicalAnalyzer {
 	
 
 	/*
-	 * Trova il lessema passatogli da readLessema e lo aggiunge all'array
-	 */
+	* Find the lexeme passed to it by readLessema and return token
+	*/
 	public Token findToken(String testo, int lTesto) {
 		int stato = 0;
 		char c;
@@ -166,7 +166,7 @@ public class LexicalAnalyzer {
 				break;
 
 				/*
-				 * CASE 2: Riconosce isDigit else si ferma
+				 * CASE 2: Recognize if is isDigit else stop it
 				 */
 			case 2: 
 				c = testo.charAt(i);
@@ -197,7 +197,7 @@ public class LexicalAnalyzer {
 			case 4: 
 				c = testo.charAt(i);
 				/*
-				 * CASE 4: Recognized Relop= 
+				 * CASE 4: Recognized Relop= , find = or > or --
 				 */
 				if(c == '=') {
 					token = "<=";
@@ -228,7 +228,7 @@ public class LexicalAnalyzer {
 				break;
 
 				/*
-				 * CASE 5: Riconosciuto Relop< o trova Relop= o si ferma
+				 * CASE 5: Recognized Relop< or find Relop= or stop it
 				 */
 			case 5: 
 				c = testo.charAt(i);
@@ -245,7 +245,7 @@ public class LexicalAnalyzer {
 				break;
 
 				/*
-				 * CASE 6: Riconosciuto Relop= o trova Relop= o  si ferma
+				 * CASE 6: Recognized Relop=, find Relop= or  stop it
 				 */
 			case 6: 
 				c = testo.charAt(i);
@@ -275,7 +275,9 @@ public class LexicalAnalyzer {
 	}
 
 
-
+/*
+ * Verify if token is a Keyword
+ */
 	public static Token checkIsKeywords(String token) {
 		Token to = new Token();
 		if(token.equals("if")) {
@@ -294,11 +296,14 @@ public class LexicalAnalyzer {
 			to.setId("Keywords");
 			to.setAttribute("FOR");
 		} else {
-			log.severe("SEZIONE checkIsKeywords: NESSUNA KEY TROVATA!");
+			log.severe("SECTION checkIsKeywords: No Keyword found!");
 		}
 		return to;
 	}
 
+	/*
+	 * Verify if the token is alredy in SymbolTable else add it
+	 */
 	public int installID(String token) {
 		int ide = 0;
 		Token to = new Token();	
@@ -312,6 +317,9 @@ public class LexicalAnalyzer {
 		return ide;
 	}
 	
+	/*
+	 * Verify if the text length is lower than i
+	 */
 	public boolean checkLengthText(int lTesto) {
 		boolean active = true;
 		if(i < lTesto) {
