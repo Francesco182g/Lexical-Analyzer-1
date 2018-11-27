@@ -302,7 +302,7 @@ public class LexicalAnalyzer {
 	}
 
 	/*
-	 * Verify if the token is alredy in SymbolTable else add it
+	 * Verify if the token is already in SymbolTable else add it
 	 */
 	public int installID(String token) {
 		int ide = 0;
