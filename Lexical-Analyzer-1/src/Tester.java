@@ -29,6 +29,7 @@ public class Tester {
 	      lessema += "" + in.nextLine();
 	      lessema = lessema + "\n";
 	    }
+	    
 		return lessema;
 	  }
 }
