@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Tester {
 	
-	public static ArrayList<Token> tokens = new ArrayList<Token>();
 	private static Scanner in;
 	public static void main (String[] args) {
 		String lessema = null;
@@ -32,8 +31,4 @@ public class Tester {
 	    }
 		return lessema;
 	  }
-	
-	public static void printToken(Token token) {
-		System.out.println(token.toString());
-	}
 }

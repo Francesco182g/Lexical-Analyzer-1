@@ -7,13 +7,10 @@ public class Circuit {
 	private static HashMap<String, Token> symbolTable = new HashMap<>();
 
 	public static void main(String[] args) throws Exception {
-
-		System.out.println("Type in input, hit Return");
-		System.out.println("To finish hit Return then Ctrl-Z");
-		System.out.println("(if it does not finish, before Ctrl-Z/D give focus to another window first)");
 		Yylex yy = new Yylex(System.in);
 
 		for(int tokenId= yy.next_token().sym; tokenId != CircuitSym.EOF; tokenId  = yy.next_token().sym) {
+		
 			String attributo = CircuitSym.terminalNames[tokenId];
 			String id = yy.yytext().toString();
 			System.out.println("token returned is "+ 
