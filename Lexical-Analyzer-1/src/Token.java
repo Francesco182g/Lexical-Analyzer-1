@@ -1,4 +1,4 @@
-
+//Created by Francesco Garofalo (francesco182g on git)
 
 public class Token {
 	private String id;

@@ -1,6 +1,6 @@
+//Created by Francesco Garofalo (francesco182g on git)
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tester {
@@ -21,8 +21,8 @@ public class Tester {
 		System.out.println(token);
 	}
 	
-	public static String leggiFile() throws FileNotFoundException {
-	    File file= new File("C:\\Users\\Francesco\\Desktop\\Compilatori\\"+"Testo.txt");
+		public static String leggiFile() throws FileNotFoundException {
+	    File file= new File("C:\\Users\\Francesco\\Desktop\\Compilatori\\"+"Esercitazione1.txt");
 	    in = new Scanner (file);
 	    String lessema = "";
 	    while (in.hasNext()) {

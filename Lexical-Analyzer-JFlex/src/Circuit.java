@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 // Lexical Analyzer based on Ian Stark Example
-
+//Created by Francesco Garofalo (francesco182g on git)
 
 public class Circuit {
 
@@ -19,44 +19,36 @@ public class Circuit {
 	 * Scanner and print token
 	 */
 	public static void getToken() throws Exception {
-
 		Yylex yy = new Yylex(System.in);
-
 		for(int tokenId= yy.next_token().sym; tokenId != CircuitSym.EOF; tokenId  = yy.next_token().sym) {
-
-			String attribute = CircuitSym.terminalNames[tokenId];
-			String id1 = yy.yytext().toString();
-			String id = id1;
-			if(attribute == "ID") {
-				id = installID(attribute);
+			String token_name = CircuitSym.terminalNames[tokenId];
+			String attribute = yy.yytext().toString();
+			
+			if(token_name == "ID") {
+				attribute = installID(attribute);
+			}else {
+				System.out.println("Tipo: "+token_name+" Attributo: "+attribute);
 			}
-			System.out.println("token: "+ 
-					id +" "+  "Class: " + attribute +"\n");
 		}
 	}
 
+	
 	/*
 	 * Verify if the token is already in SymbolTable else add it
 	 */
-	public static String installID(String attributo) {
-		String id2 = "";
+	public static String installID(String attribute) {
 		Token to = new Token();	
-		if (symbolTable.containsKey(attributo)) {
-			to = symbolTable.get(attributo);
-			id2 = to.getId();
+		if (symbolTable.containsKey(attribute)) {
+			to = symbolTable.get(attribute);
+			System.out.println("ID: "+to.getId()+" Attributo: "+to.getAttribute()+"Presente");
 		}else {
-			to = new Token(""+id2, attributo);
-			symbolTable.put(attributo, to);
-			id2 = ""+ide;
+			to = new Token(""+ide, ""+attribute);
+			symbolTable.put(attribute, to);
+			System.out.println("ID: "+ide+" Attributo: "+to.getAttribute()+"Nuovo Elemento");
 			ide++;
 		}
-		return id2;
+		return attribute;
 	}
-
-
-	public static String checkIsPresent(String id1) {
-		return id1;
-
-	}
+	
 }
 

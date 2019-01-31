@@ -1,3 +1,5 @@
+//Created by Francesco Garofalo (francesco182g on git)
+
 import java.util.HashMap;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;

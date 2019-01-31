@@ -6,17 +6,17 @@
 /** CUP generated interface containing symbol constants. */
 public interface CircuitSym {
   /* terminals */
-  public static final int RESISTOR = 6;
+	public static final int EOF = 0;
+	public static final int error = 1;
+	public static final int SEQ = 2;	
+	public static final int RESISTOR = 6;
   //public static final int LETTE = 6;
   public static final int ID = 7;
   public static final int RELOP = 8;
   public static final int DELIMITERS = 9;
   public static final int KEYWORD = 5;
   public static final int PAR = 3;
-  public static final int error = 1;
   public static final int END = 4;
-  public static final int EOF = 0;
-  public static final int SEQ = 2;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
